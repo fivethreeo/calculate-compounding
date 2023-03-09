@@ -398,3 +398,8 @@ button {
     padding-left: 0;   
   }
 }
+
+.tip {
+  height: 10rem;
+  width: 10rem;
+}

@@ -45,91 +45,105 @@ function App() {
     <div className="center intristic align">
       <div className="cover nopad">
         <h1>Compounding lot size calculator</h1>
-        <form className="inner stack">
-          <div className="form-group">
-            <label htmlFor={riskInputId}>Risk:</label>
-            <input
-              defaultValue={risk}
-              className="input-control"
-              id={riskInputId}
-              name="risk"
-              onChange={(e) => setRisk(parseInt(e.target.value))}
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor={accountSizeId}>Account size (USD):</label>
-            <input
-              defaultValue={accountSize}
-              className="input-control"
-              id={accountSizeId}
-              name="as"
-              onChange={(e) => setAccountSize(parseInt(e.target.value))}
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor={tipTextAreaId}>Paste tip here:</label>
-            <textarea
-              className="input-control"
-              id={tipTextAreaId}
-              name="tip"
-              onChange={(e) => setPrices(e.target.value)}
-            />
-          </div>
-          {prices.length > 0 && (
-            <>
-              <div className="form-group">
-                <label htmlFor="{entrySelectId}">Entry price</label>
+        <form className="inner">
+          <div className="with-sidebar">
+            <div className="stack">
 
-                <select
+            {prices.length > 0 && (
+                <>
+                  <div className="form-group">
+                    <label htmlFor="{entrySelectId}">Entry price</label>
+
+                    <select
+                      className="input-control"
+                      id="{entrySelectId}"
+                      name="entry"
+                    >
+                      {priceOptions}
+                    </select>
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="{slSelectId}">Stop-loss price</label>
+
+                    <select
+                      className="input-control"
+                      id="{slSelectId}"
+                      name="sl"
+                    >
+                      {priceOptions}
+                    </select>
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="{tpSelectId}">Take profit price</label>
+
+                    <select
+                      className="input-control"
+                      id="{tpSelectId}"
+                      name="tp"
+                    >
+                      {priceOptions}
+                    </select>
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="{limit1SelectId}">Limit 1 price</label>
+
+                    <select
+                      className="input-control"
+                      id="{limit1SelectId}"
+                      name="l1"
+                    >
+                      {priceOptions}
+                    </select>
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="{limit2SelectId}">Limit 2 price</label>
+
+                    <select
+                      className="input-control"
+                      id="{limit2SelectId}"
+                      name="l2"
+                    >
+                      {priceOptions}
+                    </select>
+                  </div>
+                  <div className="form-group">
+                    <button type="button">Submit</button>
+                  </div>
+                </>
+              )}
+            </div>
+            <div>
+              <div className="form-group">
+                <label htmlFor={riskInputId}>Risk:</label>
+                <input
+                  defaultValue={risk}
                   className="input-control"
-                  id="{entrySelectId}"
-                  name="entry"
-                >
-                  {priceOptions}
-                </select>
+                  id={riskInputId}
+                  name="risk"
+                  onChange={(e) => setRisk(parseInt(e.target.value))}
+                />
               </div>
               <div className="form-group">
-                <label htmlFor="{slSelectId}">Stop-loss price</label>
-
-                <select className="input-control" id="{slSelectId}" name="sl">
-                  {priceOptions}
-                </select>
-              </div>
-              <div className="form-group">
-                <label htmlFor="{tpSelectId}">Take profit price</label>
-
-                <select className="input-control" id="{tpSelectId}" name="tp">
-                  {priceOptions}
-                </select>
-              </div>
-              v
-              <div className="form-group">
-                <label htmlFor="{limit1SelectId}">Limit 1 price</label>
-
-                <select
+                <label htmlFor={accountSizeId}>Account size (USD):</label>
+                <input
+                  defaultValue={accountSize}
                   className="input-control"
-                  id="{limit1SelectId}"
-                  name="l1"
-                >
-                  {priceOptions}
-                </select>
+                  id={accountSizeId}
+                  name="as"
+                  onChange={(e) => setAccountSize(parseInt(e.target.value))}
+                />
               </div>
               <div className="form-group">
-                <label htmlFor="{limit2SelectId}">Limit 2 price</label>
-
-                <select
-                  className="input-control"
-                  id="{limit2SelectId}"
-                  name="l2"
-                >
-                  {priceOptions}
-                </select>
+                <label htmlFor={tipTextAreaId}>Paste tip here:</label>
+                <textarea
+                  className="input-control tip"
+                  id={tipTextAreaId}
+                  name="tip"
+                  onChange={(e) => setPrices(e.target.value)}
+                />
               </div>
-              <div className="form-group">
-                <button type="button">Submit</button>
-              </div>
-            </>
-          )}
+            </div>
+          </div>
         </form>
       </div>
     </div>
