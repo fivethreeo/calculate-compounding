@@ -1,3 +1,4 @@
+import {Decimal} from 'decimal.js';
 import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import "./App.css";
@@ -34,6 +35,12 @@ function App() {
   const limit1SelectId = useId();
   const limit2SelectId = useId();
 
+  const [entry, setEntry] = useState(new Decimal(0));
+  const [tp, setTp] = useState(new Decimal(0));
+  const [sl, setSl] = useState(new Decimal(0));
+  const [limit1, setLimit1] = useState(new Decimal(0));
+  const [limit2, setLimit2] = useState(new Decimal(0));
+
   const [accountSize, setAccountSize] = useState(1000);
 
   const riskInputId = useId();
@@ -58,6 +65,7 @@ function App() {
                       className="input-control"
                       id="{entrySelectId}"
                       name="entry"
+                      onChange={(e) => setEntry(new Decimal(e.target.value))}
                     >
                       {priceOptions}
                     </select>
@@ -69,6 +77,7 @@ function App() {
                       className="input-control"
                       id="{slSelectId}"
                       name="sl"
+                      onChange={(e) => setSl(new Decimal(e.target.value))}
                     >
                       {priceOptions}
                     </select>
@@ -80,6 +89,7 @@ function App() {
                       className="input-control"
                       id="{tpSelectId}"
                       name="tp"
+                      onChange={(e) => setTp(new Decimal(e.target.value))}
                     >
                       {priceOptions}
                     </select>
@@ -91,6 +101,7 @@ function App() {
                       className="input-control"
                       id="{limit1SelectId}"
                       name="l1"
+                      onChange={(e) => setLimit1(new Decimal(e.target.value))}
                     >
                       {priceOptions}
                     </select>
@@ -102,6 +113,7 @@ function App() {
                       className="input-control"
                       id="{limit2SelectId}"
                       name="l2"
+                      onChange={(e) => setLimit2(new Decimal(e.target.value))}
                     >
                       {priceOptions}
                     </select>
@@ -142,6 +154,9 @@ function App() {
                   onChange={(e) => setPrices(e.target.value)}
                 />
               </div>
+
+              { !entry.isZero()&&!sl.isZero()&&!limit1.isZero()&&!limit2.isZero()&& <p>All set</p>}
+
             </div>
           </div>
         </form>
