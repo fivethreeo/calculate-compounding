@@ -20,6 +20,14 @@ type tipPrices = {
   [key in "entry" | "stopLoss" | "takeProfit" | "order1" | "order2"]: Decimal;
 };
 
+type lotSizesType = {
+  [key in "entry" | "order1" | "order2"]: Decimal;
+};
+
+type lotRiskUSDType = {
+  [key in "entry" | "order1" | "order2"]: Decimal;
+};
+
 type appState = {
   accountSize: Decimal;
   risk: number;
@@ -27,13 +35,20 @@ type appState = {
   prices: tipPrices;
   positionType: string;
   pricesSet: boolean;
+  lotSizes: lotSizesType;
+  lotRiskUSD: lotRiskUSDType;
 };
 
 type appAction = {
   type: string;
   payload: string;
 };
+const calculateRisk = (state: appState): appState => {
+ if (state.pricesSet) {
 
+ }
+ return state
+}
 const appReducer = (state: appState, action: appAction): appState => {
   switch (true) {
     case ["entry", "stopLoss", "takeProfit", "order1", "order2"].includes(
@@ -105,6 +120,16 @@ function App() {
       entry: new Decimal(0),
       stopLoss: new Decimal(0),
       takeProfit: new Decimal(0),
+      order1: new Decimal(0),
+      order2: new Decimal(0),
+    },
+    lotSizes: {
+      entry: new Decimal(0),
+      order1: new Decimal(0),
+      order2: new Decimal(0),
+    },
+    lotRiskUSD: {
+      entry: new Decimal(0),
       order1: new Decimal(0),
       order2: new Decimal(0),
     },
