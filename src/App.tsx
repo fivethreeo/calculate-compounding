@@ -151,11 +151,19 @@ function App() {
                     </select>
                   </div>
                   <div className="form-group">
-                    <label htmlFor="{entrySelectId}">Entry price</label>
+                    <label htmlFor="{entrySelectId1}">Entry price</label>
 
+                    <input
+                      className="input-control"
+                      id="{entrySelectId}1"
+                      value={state.prices.entry.toString()}
+                      onChange={(e) =>
+                        dispatch({ type: "entry", payload: e.target.value })
+                      }
+                    />
                     <select
                       className="input-control"
-                      id="{entrySelectId}"
+                      id="{entrySelectId}2"
                       name="entry"
                       value={state.prices.entry.toString()}
                       onChange={(e) =>
@@ -166,11 +174,20 @@ function App() {
                     </select>
                   </div>
                   <div className="form-group">
-                    <label htmlFor="{slSelectId}">Stop-loss price</label>
+                    <label htmlFor="{slSelectId}1">Stop-loss price</label>
 
+                    <input
+                      className="input-control"
+                      id="{slSelectId}1"
+                      name="sl"
+                      value={state.prices.stopLoss.toString()}
+                      onChange={(e) =>
+                        dispatch({ type: "stopLoss", payload: e.target.value })
+                      }
+                    />
                     <select
                       className="input-control"
-                      id="{slSelectId}"
+                      id="{slSelectId}2"
                       name="sl"
                       value={state.prices.stopLoss.toString()}
                       onChange={(e) =>
@@ -181,11 +198,23 @@ function App() {
                     </select>
                   </div>
                   <div className="form-group">
-                    <label htmlFor="{tpSelectId}">Take profit price</label>
+                    <label htmlFor="{tpSelectId}1">Take profit price</label>
 
+                    <input
+                      className="input-control"
+                      id="{tpSelectId}1"
+                      name="tp"
+                      value={state.prices.takeProfit.toString()}
+                      onChange={(e) =>
+                        dispatch({
+                          type: "takeProfit",
+                          payload: e.target.value,
+                        })
+                      }
+                    />
                     <select
                       className="input-control"
-                      id="{tpSelectId}"
+                      id="{tpSelectId}2"
                       name="tp"
                       value={state.prices.takeProfit.toString()}
                       onChange={(e) =>
