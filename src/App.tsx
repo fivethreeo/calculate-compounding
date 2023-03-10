@@ -23,6 +23,7 @@ type tipPrices = {
 type appState = {
   accountSize: Decimal;
   risk: number;
+  lotSize: number,
   prices: tipPrices;
   positionType: string;
   pricesSet: boolean;
@@ -77,6 +78,8 @@ const appReducer = (state: appState, action: appAction): appState => {
       }
       case action.type == "positionType":
         return { ...state, positionType: action.payload };
+      case action.type == "lotSize":
+        return { ...state, lotSize: parseInt(action.payload) };
 
 
   }
@@ -85,6 +88,7 @@ const appReducer = (state: appState, action: appAction): appState => {
 
 function App() {
   const accountSizeId = useId();
+  const lotSizeId = useId();
   const tipTextAreaId = useId();
   const positionTypeSelectId = useId();
   const entrySelectId = useId();
@@ -96,6 +100,7 @@ function App() {
   const [state, dispatch] = useReducer(appReducer, {
     accountSize: new Decimal(0),
     risk: 3,
+    lotSize: 100,
     prices: {
       entry: new Decimal(0),
       stopLoss: new Decimal(0),
@@ -154,7 +159,7 @@ function App() {
                     <label htmlFor="{entrySelectId1}">Entry price</label>
 
                     <input
-                      className="input-control"
+                      className="input-control smallinput"
                       id="{entrySelectId}1"
                       value={state.prices.entry.toString()}
                       onChange={(e) =>
@@ -177,7 +182,7 @@ function App() {
                     <label htmlFor="{slSelectId}1">Stop-loss price</label>
 
                     <input
-                      className="input-control"
+                      className="input-control smallinput"
                       id="{slSelectId}1"
                       name="sl"
                       value={state.prices.stopLoss.toString()}
@@ -201,7 +206,7 @@ function App() {
                     <label htmlFor="{tpSelectId}1">Take profit price</label>
 
                     <input
-                      className="input-control"
+                      className="input-control smallinput"
                       id="{tpSelectId}1"
                       name="tp"
                       value={state.prices.takeProfit.toString()}
@@ -231,7 +236,7 @@ function App() {
                     <label htmlFor="{limit1SelectId}1">Limit 1 price</label>
 
                     <input
-                      className="input-control"
+                      className="input-control smallinput"
                       id="{limit1SelectId}1"
                       name="l1"
                       value={state.prices.order1.toString()}
@@ -255,7 +260,7 @@ function App() {
                     <label htmlFor="{limit2SelectId}1">Limit 2 price</label>
 
                     <input
-                      className="input-control"
+                      className="input-control smallinput"
                       id="{limit2SelectId}1"
                       name="l2"
                       value={state.prices.order2.toString()}
@@ -286,7 +291,7 @@ function App() {
                 <label htmlFor={riskInputId}>Risk:</label>
                 <input
                   defaultValue={risk}
-                  className="input-control"
+                  className="input-control smallinput"
                   id={riskInputId}
                   name="risk"
                   onChange={(e) =>
@@ -298,11 +303,23 @@ function App() {
                 <label htmlFor={accountSizeId}>Account size (USD):</label>
                 <input
                   defaultValue={accountSize}
-                  className="input-control"
+                  className="input-control smallinput"
                   id={accountSizeId}
                   name="as"
                   onChange={(e) =>
                     dispatch({ type: "accountSize", payload: e.target.value })
+                  }
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor={lotSizeId}>Lot size:</label>
+                <input
+                  value={state.lotSize}
+                  className="input-control smallinput"
+                  id={lotSizeId}
+                  name="as"
+                  onChange={(e) =>
+                    dispatch({ type: "lotSize", payload: e.target.value })
                   }
                 />
               </div>

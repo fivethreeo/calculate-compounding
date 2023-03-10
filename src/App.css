@@ -403,3 +403,5 @@ button {
   height: 10rem;
   width: 10rem;
 }
+
+.smallinput { width: 10ch;}
