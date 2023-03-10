@@ -228,11 +228,20 @@ function App() {
                     </select>
                   </div>
                   <div className="form-group">
-                    <label htmlFor="{limit1SelectId}">Limit 1 price</label>
+                    <label htmlFor="{limit1SelectId}1">Limit 1 price</label>
 
+                    <input
+                      className="input-control"
+                      id="{limit1SelectId}1"
+                      name="l1"
+                      value={state.prices.order1.toString()}
+                      onChange={(e) =>
+                        dispatch({ type: "order1", payload: e.target.value })
+                      }
+                    />
                     <select
                       className="input-control"
-                      id="{limit1SelectId}"
+                      id="{limit1SelectId}2"
                       name="l1"
                       value={state.prices.order1.toString()}
                       onChange={(e) =>
@@ -243,11 +252,20 @@ function App() {
                     </select>
                   </div>
                   <div className="form-group">
-                    <label htmlFor="{limit2SelectId}">Limit 2 price</label>
+                    <label htmlFor="{limit2SelectId}1">Limit 2 price</label>
 
+                    <input
+                      className="input-control"
+                      id="{limit2SelectId}1"
+                      name="l2"
+                      value={state.prices.order2.toString()}
+                      onChange={(e) =>
+                        dispatch({ type: "order2", payload: e.target.value })
+                      }
+                    />
                     <select
                       className="input-control"
-                      id="{limit2SelectId}"
+                      id="{limit2SelectId}2"
                       name="l2"
                       value={state.prices.order2.toString()}
                       onChange={(e) =>
