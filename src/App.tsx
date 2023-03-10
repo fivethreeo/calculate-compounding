@@ -45,7 +45,13 @@ type appAction = {
 };
 const calculateRisk = (state: appState): appState => {
  if (state.pricesSet) {
-
+    const lotRiskUSD = {
+      ...state.lotRiskUSD,
+      entry: state.prices.entry.sub(state.prices.stopLoss).abs().mul(new Decimal(state.lotSize).div(10)).mul(state.lotSizes.entry),
+      order1: state.prices.order1.sub(state.prices.stopLoss).abs().mul(new Decimal(state.lotSize).div(10)).mul(state.lotSizes.order1),
+      order2: state.prices.order2.sub(state.prices.stopLoss).abs().mul(new Decimal(state.lotSize).div(10)).mul(state.lotSizes.order2),
+    }
+    return {...state, lotRiskUSD }
  }
  return state
 }
@@ -58,15 +64,15 @@ const appReducer = (state: appState, action: appAction): appState => {
         ...state.prices,
         [action.type]: new Decimal(action.payload),
       };
-      return {
+      return calculateRisk({
         ...state,
         prices: newPrices,
         pricesSet: Object.values(newPrices).every((value) => !value.isZero()),
-      };
+      });
     case action.type == "accountSize":
-      return { ...state, accountSize: new Decimal(action.payload) };
+      return  calculateRisk({ ...state, accountSize: new Decimal(action.payload) })
     case action.type == "risk":
-      return { ...state, risk: parseInt(action.payload) };
+      return calculateRisk({ ...state, risk: parseInt(action.payload) });
     case action.type == "parseTip":
       const positionType = buySellRe.test(action.payload) ? "SELL" : "BUY";
       
@@ -89,13 +95,20 @@ const appReducer = (state: appState, action: appAction): appState => {
           order2: positionType == "BUY" ? prices[3] : prices[1],
         };
 
-        return { ...state, positionType, prices: newPrices };
+        return calculateRisk({ ...state, positionType, pricesSet: true, prices: newPrices });
       }
       case action.type == "positionType":
         return { ...state, positionType: action.payload };
       case action.type == "lotSize":
-        return { ...state, lotSize: parseInt(action.payload) };
+        return calculateRisk({ ...state, lotSize: parseInt(action.payload) });
+      case /LotSize/.test(action.type):
+        const newLots = {
+          ...state.lotSizes,
+          [action.type.replace(/LotSize/,'')]: new Decimal(action.payload),
+        };
+        return calculateRisk({ ...state, lotSizes: newLots });
 
+      
 
   }
   return state;
@@ -124,9 +137,9 @@ function App() {
       order2: new Decimal(0),
     },
     lotSizes: {
-      entry: new Decimal(0),
-      order1: new Decimal(0),
-      order2: new Decimal(0),
+      entry: new Decimal(0.1),
+      order1: new Decimal(0.1),
+      order2: new Decimal(0.1),
     },
     lotRiskUSD: {
       entry: new Decimal(0),
@@ -202,6 +215,17 @@ function App() {
                     >
                       {priceOptions}
                     </select>
+                    <input
+                      className="input-control smallinput"
+                      id="{entrySelectId}3"
+                      defaultValue={state.lotSizes.entry.toString()}
+                      onBlur={(e) =>
+                        dispatch({ type: "entryLotSize", payload: e.target.value })
+                      }
+                    />
+                    <span className="input-control">
+                      {state.lotRiskUSD.entry.toString()}$
+                    </span>
                   </div>
                   <div className="form-group">
                     <label htmlFor="{slSelectId}1">Stop-loss price</label>
@@ -280,6 +304,17 @@ function App() {
                     >
                       {priceOptions}
                     </select>
+                    <input
+                      className="input-control smallinput"
+                      id="{order1SelectId}3"
+                      value={state.lotSizes.order1.toString()}
+                      onBlur={(e) =>
+                        dispatch({ type: "order1LotSize", payload: e.target.value })
+                      }
+                    />
+                    <span className="input-control">
+                      {state.lotRiskUSD.order1.toString()}$
+                    </span>
                   </div>
                   <div className="form-group">
                     <label htmlFor="{limit2SelectId}1">Limit 2 price</label>
@@ -304,6 +339,17 @@ function App() {
                     >
                       {priceOptions}
                     </select>
+                    <input
+                      className="input-control smallinput"
+                      id="{order2SelectId}3"
+                      value={state.lotSizes.order2.toString()}
+                      onBlur={(e) =>
+                        dispatch({ type: "order2LotSize", payload: e.target.value })
+                      }
+                    />
+                    <span className="input-control">
+                      {state.lotRiskUSD.order2.toString()}$
+                    </span>
                   </div>
                   <div className="form-group">
                     <button type="button">Submit</button>
