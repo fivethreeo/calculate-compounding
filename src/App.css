@@ -144,6 +144,21 @@ width: 100%;
   justify-content: flex-start;
 }
 
+.compat-cluster {
+  --space: 1rem;
+}
+
+.compat-cluster > * {
+  display: flex;
+  flex-wrap: wrap;
+  /* ↓ multiply by -1 to negate the halved value */
+  margin: calc(var(--space) / 2 * -1);
+}
+
+.compat-cluster > * > * {
+  /* ↓ half the value, because of the 'doubling up' */
+  margin: calc(var(--space) / 2);
+}
 
 .with-sidebar {
   display: flex;
@@ -163,7 +178,7 @@ width: 100%;
 .with-sidebar.left > :last-child {
   flex-basis: 0;
   flex-grow: 999;
-  min-inline-size: 50%;
+  min-inline-size: var(--content-min-width, 50%);
 }
 
 .with-sidebar.right > :last-child {
@@ -174,9 +189,45 @@ width: 100%;
 .with-sidebar.right > :first-child {
   flex-basis: 0;
   flex-grow: 999;
-  min-inline-size: 50%;
+  min-inline-size: var(--content-min-width, 50%);
 }
 
+
+.compat-with-sidebar > * {
+  display: flex;
+  flex-wrap: wrap;
+  margin: calc(var(--space) / 2 * -1);
+}
+
+.compat-with-sidebar > * > * {
+  margin: calc(var(--space) / 2);
+}
+
+.compat-with-sidebar.width {
+  --sidebar-width: 10rem;
+}
+
+.compat-with-sidebar.left > * > :first-child {
+  flex-basis: var(--sidebar-width, auto); 
+  flex-grow: 1;
+}
+
+.compat-with-sidebar.left > * > :last-child {
+  flex-basis: 0;
+  flex-grow: 999;
+  min-inline-size: var(--content-min-width, 50%);
+}
+
+.compat-with-sidebar.right > * > :last-child {
+  flex-basis: var(--sidebar-width, auto); 
+  flex-grow: 1;
+}
+
+.compat-with-sidebar.right > * > :first-child {
+  flex-basis: 0;
+  flex-grow: 999;
+  min-inline-size: var(--content-min-width, 50%);
+}
 
 .switcher {
   display: flex;
