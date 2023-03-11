@@ -440,7 +440,7 @@ function App() {
                     <label>Risk %</label>
 
                     <span className="input-control">
-                      {state.lotRiskPct.entry.toFixed(1).toString()}% + {state.lotRiskPct.order1.toFixed(1).toString()}% + {state.lotRiskPct.order2.toFixed(1).toString()}% = {state.totalRiskPct.toString()}%
+                      {state.lotRiskPct.entry.toFixed(1).toString()}% + {state.lotRiskPct.order1.toFixed(1).toString()}% + {state.lotRiskPct.order2.toFixed(1).toString()}% = {state.totalRiskPct.toFixed(1).toString()}%
                     </span>
                   </div>
                   <div className="form-group">
