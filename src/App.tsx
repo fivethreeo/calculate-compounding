@@ -251,7 +251,7 @@ function App() {
                       onChange={(e) =>
                         dispatch({
                           type: "positionType",
-                          payload: e.target.value,
+                          payload: e.target.value || '0',
                         })
                       }
                     >
@@ -267,7 +267,7 @@ function App() {
                       id="{entrySelectId}1"
                       value={state.prices.entry.toString()}
                       onChange={(e) =>
-                        dispatch({ type: "entry", payload: e.target.value })
+                        dispatch({ type: "entry", payload: e.target.value || '0' })
                       }
                     />
                     <select
@@ -276,7 +276,7 @@ function App() {
                       name="entry"
                       defaultValue={state.prices.entry.toString()}
                       onChange={(e) =>
-                        dispatch({ type: "entry", payload: e.target.value })
+                        dispatch({ type: "entry", payload: e.target.value || '0' })
                       }
                     >
                       {priceOptions}
@@ -286,7 +286,7 @@ function App() {
                       id="{entrySelectId}3"
                       defaultValue={state.lotSizes.entry.toString()}
                       onChange={(e) =>
-                        dispatch({ type: "entryLotSize", payload: e.target.value })
+                        dispatch({ type: "entryLotSize", payload: e.target.value || '0' })
                       }
                     />
                     <span className="input-control">
@@ -306,7 +306,7 @@ function App() {
                       name="sl"
                       value={state.prices.stopLoss.toString()}
                       onChange={(e) =>
-                        dispatch({ type: "stopLoss", payload: e.target.value })
+                        dispatch({ type: "stopLoss", payload: e.target.value || '0' })
                       }
                     />
                     <select
@@ -315,7 +315,7 @@ function App() {
                       name="sl"
                       defaultValue={state.prices.stopLoss.toString()}
                       onChange={(e) =>
-                        dispatch({ type: "stopLoss", payload: e.target.value })
+                        dispatch({ type: "stopLoss", payload: e.target.value || '0' })
                       }
                     >
                       {priceOptions}
@@ -332,7 +332,7 @@ function App() {
                       onChange={(e) =>
                         dispatch({
                           type: "takeProfit",
-                          payload: e.target.value,
+                          payload: e.target.value || '0',
                         })
                       }
                     />
@@ -344,7 +344,7 @@ function App() {
                       onChange={(e) =>
                         dispatch({
                           type: "takeProfit",
-                          payload: e.target.value,
+                          payload: e.target.value || '0',
                         })
                       }
                     >
@@ -360,7 +360,7 @@ function App() {
                       name="l1"
                       value={state.prices.order1.toString()}
                       onChange={(e) =>
-                        dispatch({ type: "order1", payload: e.target.value })
+                        dispatch({ type: "order1", payload: e.target.value || '0' })
                       }
                     />
                     <select
@@ -369,7 +369,7 @@ function App() {
                       name="l1"
                       defaultValue={state.prices.order1.toString()}
                       onChange={(e) =>
-                        dispatch({ type: "order1", payload: e.target.value })
+                        dispatch({ type: "order1", payload: e.target.value || '0' })
                       }
                     >
                       {priceOptions}
@@ -379,7 +379,7 @@ function App() {
                       id="{order1SelectId}3"
                       defaultValue={state.lotSizes.order1.toString()}
                       onChange={(e) =>
-                        dispatch({ type: "order1LotSize", payload: e.target.value })
+                        dispatch({ type: "order1LotSize", payload: e.target.value || '0' })
                       }
                     />
                     <span className="input-control">
@@ -399,7 +399,7 @@ function App() {
                       name="l2"
                       value={state.prices.order2.toString()}
                       onChange={(e) =>
-                        dispatch({ type: "order2", payload: e.target.value })
+                        dispatch({ type: "order2", payload: e.target.value || '0' })
                       }
                     />
                     <select
@@ -408,7 +408,7 @@ function App() {
                       name="l2"
                       defaultValue={state.prices.order2.toString()}
                       onChange={(e) =>
-                        dispatch({ type: "order2", payload: e.target.value })
+                        dispatch({ type: "order2", payload: e.target.value || '0' })
                       }
                     >
                       {priceOptions}
@@ -418,7 +418,7 @@ function App() {
                       id="{order2SelectId}3"
                       defaultValue={state.lotSizes.order2.toString()}
                       onChange={(e) =>
-                        dispatch({ type: "order2LotSize", payload: e.target.value })
+                        dispatch({ type: "order2LotSize", payload: e.target.value || '0' })
                       }
                     />
                     <span className="input-control">
@@ -458,7 +458,7 @@ function App() {
                   id={riskInputId}
                   name="risk"
                   onChange={(e) =>
-                    dispatch({ type: "risk", payload: e.target.value })
+                    dispatch({ type: "risk", payload: e.target.value || '0' })
                   }
                 />
               </div>
@@ -470,7 +470,7 @@ function App() {
                   id={accountSizeId}
                   name="as"
                   onChange={(e) =>
-                    dispatch({ type: "accountSize", payload: e.target.value })
+                    dispatch({ type: "accountSize", payload: e.target.value || '0' })
                   }
                 />
               </div>
@@ -482,7 +482,7 @@ function App() {
                   id={lotSizeId}
                   name="as"
                   onChange={(e) =>
-                    dispatch({ type: "lotSize", payload: e.target.value })
+                    dispatch({ type: "lotSize", payload: e.target.value || '0' })
                   }
                 />
               </div>
@@ -493,7 +493,7 @@ function App() {
                   id={tipTextAreaId}
                   name="tip"
                   onChange={(e) =>
-                    dispatch({ type: "parseTip", payload: e.target.value })
+                    dispatch({ type: "parseTip", payload: e.target.value || '0' })
                   }
                   defaultValue={"New trade idea by dipen\nXauusd (gold) sell now @1812.96\n1st sell limit 1816.70\n2nd sell limit 1818.81\nSl 1822.23\nTp 1807\n\n"}                />
               </div>
