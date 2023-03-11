@@ -247,7 +247,7 @@ function App() {
                       className="input-control"
                       id="{positionTypeSelectId}"
                       name="entry"
-                      defaultValue={state.positionType}
+                      value={state.positionType}
                       onChange={(e) =>
                         dispatch({
                           type: "positionType",
